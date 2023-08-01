@@ -43,5 +43,17 @@ namespace ECAD
 		{
 			get { return new System.Drawing.PointF((float)X, (float)Y); }
 		}
-	}
+
+		public Vector2 CopyOrMove(Vector2 fromPoint, Vector2 toPoint)
+		{
+			double dx = toPoint.X - fromPoint.X;
+			double dy = toPoint.Y - fromPoint.Y;
+
+			return new Vector2(this.x + dx, this.y + dy);
+		}
+        public override string ToString()
+		{
+			return string.Format("{0,0:F3}, {1,0:F3}", this.x, this.y);
+        }
+    }
 }

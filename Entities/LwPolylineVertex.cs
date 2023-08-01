@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace ECAD
 {
     public class LwPolylineVertex
+		:ICloneable
     {
 		private Vector2 position;
 		private double bulge;
@@ -17,6 +18,10 @@ namespace ECAD
 		}
 		public LwPolylineVertex(Vector2 position)
 			:this(position, 0.0)
+		{
+		}
+		public LwPolylineVertex(double x, double y)
+			:this(new Vector2(x,y), 0.0)
 		{
 		}
 		public LwPolylineVertex(Vector2 position, double bulge)
@@ -35,6 +40,15 @@ namespace ECAD
 		{
 			get { return position; }
 			set { position = value; }
+		}
+
+		public object Clone()
+		{
+			return new LwPolylineVertex
+			{
+				Position = this.Position,
+				Bulge = this.bulge
+			};
 		}
 
 	}

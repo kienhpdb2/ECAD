@@ -63,9 +63,9 @@ namespace ECAD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap empathy_map_create {
+        internal static System.Drawing.Bitmap _360_F_337277306_bOwr2gmisHGZYFQrnYEYNmx2uVP7nTxE1 {
             get {
-                object obj = ResourceManager.GetObject("empathy map create", resourceCulture);
+                object obj = ResourceManager.GetObject("360_F_337277306_bOwr2gmisHGZYFQrnYEYNmx2uVP7nTxE1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace ECAD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap IMG_7740 {
+        internal static System.Drawing.Bitmap pngwing_com__1_ {
             get {
-                object obj = ResourceManager.GetObject("IMG_7740", resourceCulture);
+                object obj = ResourceManager.GetObject("pngwing.com (1)", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,19 +83,9 @@ namespace ECAD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap istockphoto_1068663328_1024x1024 {
+        internal static System.Drawing.Bitmap pure_white_background_85a2a7fd {
             get {
-                object obj = ResourceManager.GetObject("istockphoto-1068663328-1024x1024", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap logo_soict_hust_1 {
-            get {
-                object obj = ResourceManager.GetObject("logo-soict-hust-1", resourceCulture);
+                object obj = ResourceManager.GetObject("pure-white-background-85a2a7fd", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

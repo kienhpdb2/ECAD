@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace ECAD.Entities
 {
     public class Line
+		:EntityObject
     {
 		private Vector3 startPoint;
 		private Vector3 endPoint;
@@ -19,6 +20,7 @@ namespace ECAD.Entities
 		}
 		
 		public Line(Vector3 start, Vector3 end)
+			:base(EntityType.Line)
 		{
 			this.StartPoint = start;
 			this.EndPoint = end;
@@ -52,7 +54,30 @@ namespace ECAD.Entities
 				return Math.Sqrt(dx * dx + dy * dy + dz * dz);
 			}
 		}
+		public override object CopyOrMove(Vector3 fromPoint, Vector3 toPoint)
+		{
+			Vector3 startpoint = this.startPoint.CopyOrMove(fromPoint, toPoint);
+			Vector3 endpoint = this.endPoint.CopyOrMove(fromPoint, toPoint);
+			return new Line
+			{
+				StartPoint = startpoint,
+				EndPoint = endpoint,
+				Thickness = this.thickness,
+				IsVisible = this.isVisible
+			};
+		}
+        public override object Clone()
+        {
+			return new Line
+			{
+				StartPoint = this.startPoint,
+				EndPoint = this.endPoint,
+                Thickness = this.thickness,
+                // EntityObject properties
+                IsVisible = this.isVisible
+            };
 
+        }
 
     }
 }
