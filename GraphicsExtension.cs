@@ -38,21 +38,5 @@ namespace ECAD
             g.DrawLine(pen, line.StartPoint.ToPointF, line.EndPoint.ToPointF);
             g.ResetTransform();
         }
-
-        public static void DrawLwPolyline (this Graphics g, Pen pen, LwPolyline polyline)
-        {
-            PointF[] vertexes = new PointF[polyline.Vertexes.Count];
-            if(polyline.Isclosed)
-            {
-                vertexes = new PointF[polyline.Vertexes.Count + 1];
-                vertexes[polyline.Vertexes.Count] = polyline.Vertexes[0].Position.ToPointF;
-            }
-
-            for (int i=0; i<polyline.Vertexes.Count; i++)
-                vertexes[i] = polyline.Vertexes[i].Position.ToPointF;
-            g.SetTransForm();
-            g.DrawLines(pen, vertexes);
-            g.ResetTransform();
-        }
     }
 }

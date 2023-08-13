@@ -73,6 +73,16 @@ namespace ECAD.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap istockphoto_1068663328_1024x1024 {
+            get {
+                object obj = ResourceManager.GetObject("istockphoto-1068663328-1024x1024", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap pngwing_com__1_ {
             get {
                 object obj = ResourceManager.GetObject("pngwing.com (1)", resourceCulture);
@@ -86,6 +96,36 @@ namespace ECAD.Properties {
         internal static System.Drawing.Bitmap pure_white_background_85a2a7fd {
             get {
                 object obj = ResourceManager.GetObject("pure-white-background-85a2a7fd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Screenshot_2023_08_10_135836_fotor_20230810135929 {
+            get {
+                object obj = ResourceManager.GetObject("Screenshot 2023-08-10 135836-fotor-20230810135929", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Voltage_Source_svg_Cropped {
+            get {
+                object obj = ResourceManager.GetObject("Voltage_Source.svg Cropped", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Web_capture_10_8_2023_133345_spicesharp_github_io_fotor_20230810133543 {
+            get {
+                object obj = ResourceManager.GetObject("Web capture_10-8-2023_133345_spicesharp.github.io-fotor-20230810133543", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

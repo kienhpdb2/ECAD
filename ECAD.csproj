@@ -96,7 +96,6 @@
     <Compile Include="Entities\EntityType.cs" />
     <Compile Include="Entities\Line.cs" />
     <Compile Include="Entities\Point.cs" />
-    <Compile Include="Entities\PolyLineTypeFlags.cs" />
     <Compile Include="GraphicsExtension.cs" />
     <Compile Include="GraphicsForm.cs">
       <SubType>Form</SubType>
@@ -104,8 +103,6 @@
     <Compile Include="GraphicsForm.Designer.cs">
       <DependentUpon>GraphicsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Entities\LwPolyline.cs" />
-    <Compile Include="Entities\LwPolylineVertex.cs" />
     <Compile Include="Methods\Method.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,7 +111,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Vector2.cs" />
     <Compile Include="Vector3.cs" />
     <EmbeddedResource Include="GraphicsForm.resx">
       <DependentUpon>GraphicsForm.cs</DependentUpon>
@@ -153,6 +149,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\360_F_337277306_bOwr2gmisHGZYFQrnYEYNmx2uVP7nTxE1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot 2023-08-10 135836-fotor-20230810135929.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Web capture_10-8-2023_133345_spicesharp.github.io-fotor-20230810133543.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Voltage_Source.svg Cropped.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\istockphoto-1068663328-1024x10241.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

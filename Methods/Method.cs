@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ECAD.Entities;
+using SpiceSharp.Components;
+using SpiceSharp.Simulations;
+using SpiceSharp;
 
 namespace ECAD.Methods
 {
@@ -44,7 +47,7 @@ namespace ECAD.Methods
         }
 
 
-        private static bool IsPointOnLine(Line line1, Vector3 point)
+        public static bool IsPointOnLine(Line line1, Vector3 point)
 
         {
 
@@ -70,7 +73,7 @@ namespace ECAD.Methods
 
             return IsZero(d1 - d2, epsilon);
         }
-        private static bool IsZero(double d, double epsilon) 
+        private static bool IsZero(double d, double epsilon)
         {
             return d >= -epsilon && d <= epsilon;
         }
@@ -85,32 +88,32 @@ namespace ECAD.Methods
         //        {
         //            case EntityType.Line:
         //        }
-                
+
         //    }
 
-            
+
         //}
         #endregion
         #region Modify1 Selection
-        public static void Modify1Selection(int modifyIndex, List<EntityObject> entities, Vector3 fromPoint, Vector3 toPoint)
-        {
-            for (int i = 0; i < entities.Count; i++)
-            {
-                if (entities[i].IsSelected)
-                {
-                    switch (modifyIndex)
-                    {
-                        case 0: // Copy
-                            entities.Add(entities[i].CopyOrMove(fromPoint, toPoint) as EntityObject);
-                            break;
-                        case 1: // Move
-                            entities[i] = entities[i].CopyOrMove(fromPoint, toPoint) as EntityObject;
-                            entities[i].DeSelect();
-                            break;
-                    }
-                }
-            }
-        }
+        //public static void Modify1Selection(int modifyIndex, List<EntityObject> entities, Vector3 fromPoint, Vector3 toPoint)
+        //{
+        //    for (int i = 0; i < entities.Count; i++)
+        //    {
+        //        if (entities[i].IsSelected)
+        //        {
+        //            switch (modifyIndex)
+        //            {
+        //                case 0: // Copy
+        //                    entities.Add(entities[i].CopyOrMove(fromPoint, toPoint) as EntityObject);
+        //                    break;
+        //                case 1: // Move
+        //                    entities[i] = entities[i].CopyOrMove(fromPoint, toPoint) as EntityObject;
+        //                    entities[i].DeSelect();
+        //                    break;
+        //            }
+        //        }
+        //    }
+        //}
         #endregion
         public static void Rotate(this PictureBox pictureBox, float angle)
         {
@@ -142,5 +145,17 @@ namespace ECAD.Methods
             // Hiển thị hình ảnh đã quay trong PictureBox
             pictureBox.Image = rotatedImage;
         }
+        public static void Delete(List<EntityObject> entities)
+        {
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].IsSelected)
+                {
+                    entities.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
     }
 }

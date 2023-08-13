@@ -11,43 +11,62 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ECAD.Entities;
 using ECAD.Methods;
-
+using SpiceSharp.Components;
+using SpiceSharp.Simulations;
+using SpiceSharp;
 namespace ECAD
 {
     public partial class GraphicsForm : Form
     {
-        private PictureBox pictureBoxResistor;
-        Random rand = new Random();
+
+        private Circuit ckt = new Circuit();
+        public Circuit GetCircuit()
+        {
+            return ckt;
+        }
         List<PictureBox> items = new List<PictureBox>();
+        List<TextBox> textures = new List<TextBox>();
         public GraphicsForm()
         {
             InitializeComponent();
         }
 
         private PictureBox newPic;
-        private void MakePictureBox()
+        private void MakePictureBox(PictureBox sourcePictureBox)
         {
-            newPic = new PictureBox();
-            newPic.Height = pictureBox1.Height;
-            newPic.Width = pictureBox1.Width;
-            newPic.Location = pictureBox1.Location;
-            newPic.SizeMode = pictureBox1.SizeMode;
-            // Đường dẫn tới hình ảnh 
-            // string imagePath = "C:\\Users\\dinhk\\Downloads\\360_F_337277306_bOwr2gmisHGZYFQrnYEYNmx2uVP7nTxE.jpg";
-            // Hiển thị hình ảnh trong PictureBox
-            newPic.Image = pictureBox1.Image;
+            PictureBox newPic = new PictureBox();
+            newPic.Height = sourcePictureBox.Height;
+            newPic.Width = sourcePictureBox.Width;
+            newPic.Location = sourcePictureBox.Location;
+            newPic.SizeMode = sourcePictureBox.SizeMode;
+            newPic.Image = sourcePictureBox.Image;
             ControlExtension.Draggable(newPic, true);
+            newPic.MouseClick += NewPic_MouseClick;
             items.Add(newPic);
             this.Controls.Add(newPic);
             newPic.BringToFront();
         }
-
+        private void MakeTextBox(PictureBox sourcePictureBox)
+        {
+            TextBox newTextBox = new TextBox();
+            newTextBox.Location = sourcePictureBox.Location; // You might want to adjust the location
+            //newTextBox.Size = textBox1.Size;
+           // newTextBox.Font = textBox1.Font;
+            newTextBox.TextChanged += NewTextBox_TextChanged;
+            newTextBox.MouseDoubleClick += NewTextBox_MouseClick;
+            this.Controls.Add(newTextBox);
+            ControlExtension.Draggable(newTextBox, true);
+            //newTextBox.MouseClick += NewTextBox_MouseClick;
+            textures.Add(newTextBox);
+            newTextBox.BringToFront();
+        }
+        private void NewTextBox_TextChanged(object sender, EventArgs e)
+        {
+        }
         // list
+        private List<EntityObject> entities;
         private List<Entities.Point> points = new List<Entities.Point>();
         private List<Entities.Line> lines = new List<Entities.Line>();
-        private List<LwPolyline> polylines = new List<LwPolyline>();
-        private LwPolyline tempPolyline = new LwPolyline();
-
         // Vetor3
         private Vector3 currentPosition;  // float point pare currentPosition
         private Vector3 firstPoint;
@@ -75,13 +94,13 @@ namespace ECAD
             drawing.Refresh();
         }
 
-        private void CancelAll(int index = 1)
-        {
-            DrawIndex = -1;
-            active_drawing = false;
-            ClickNum = 1;
-            // LwPolylineCloseStatus(index);
-        }
+        //private void CancelAll(int index = 1)
+        //{
+        //    DrawIndex = -1;
+        //    active_drawing = false;
+        //    ClickNum = 1;
+        //    // LwPolylineCloseStatus(index);
+        //}
 
         // Get screen dpi
         private float DPI
@@ -106,9 +125,10 @@ namespace ECAD
 
         private void drawing_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left) // click chuột trái
+
+            if (e.Button == MouseButtons.Left) // giữ chuột trái
             {
-                if (active_drawing)
+
                 {
                     switch (DrawIndex)
                     {
@@ -131,18 +151,13 @@ namespace ECAD
 
                             }
                             break;
-                        case 2: // LwPolyLine
-                            firstPoint = currentPosition;
-                            tempPolyline.Vertexes.Add(new LwPolylineVertex(firstPoint.ToVector2));
-                            ClickNum = 2;
-                            break;
+
                     }
                     drawing.Refresh();
                 }
             }
 
         }
-
         private void drawing_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SetParameters(Pixel_to_Mn(drawing.Height));
@@ -164,28 +179,14 @@ namespace ECAD
                 foreach (Entities.Line l in lines)
                 {
                     e.Graphics.DrawLine(pen, l);
-                }
-            }
-            // Draw all LwPolyline 
-            if (polylines.Count > 0)
-            {
-                foreach (LwPolyline lw in polylines)
-                {
-                    e.Graphics.DrawLwPolyline(pen, lw);
-                }
-            }
-            //DrawtempPolyline
-            if (tempPolyline.Vertexes.Count > 1)
-            {
 
-                e.Graphics.DrawLwPolyline(pen, tempPolyline);
+                }
             }
             // Draw line extended
 
             switch (DrawIndex)
             {
                 case 1:
-                case 2:
                     if ((ClickNum == 2))
                     {
                         Entities.Line line = new Entities.Line(firstPoint, currentPosition);
@@ -193,7 +194,7 @@ namespace ECAD
                     }
                     break;
             }
-            // Test line line intersection
+            //Test line line intersection
 
             if (lines.Count > 0)
             {
@@ -217,7 +218,6 @@ namespace ECAD
             drawing.Cursor = Cursors.Cross;
 
         }
-
         private void lineBtn_Click(object sender, EventArgs e)
         {
             DrawIndex = 1;
@@ -225,18 +225,16 @@ namespace ECAD
             drawing.Cursor = Cursors.Cross;
         }
 
-
-        private void closeBoundary_Click(object sender, EventArgs e)
-        {
-            switch (DrawIndex)
-            {
-                case 1: //Line
-                    break;
-                case 2: //LwPolyLine
-                    CancelAll(2);
-                    break;
-            }
-        }
+        #region Eror
+        //private void closeBoundary_Click(object sender, EventArgs e)
+        //{
+        //    switch (DrawIndex)
+        //    {
+        //        case 1: 
+        //            CancelAll(2);
+        //            break;
+        //    }
+        //}
         //private void LwPolylineCloseStatus (int index)
         //{
         //    List<LwPolylineVertex> vertexes = new List<LwPolylineVertex>();
@@ -260,6 +258,7 @@ namespace ECAD
         //    }
         //    tempPolyline.Vertexes.Clear();
         //}
+        #endregion
         private void CancelAll()
         {
             DrawIndex = -1;
@@ -268,17 +267,39 @@ namespace ECAD
             ClickNum = 1;
         }
 
-        private void cancelToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void cancelToolStripMenuItem1_Click(object sender, EventArgs e) // nút cancel
         {
             CancelAll();
         }
 
         public void rButton_Click(object sender, EventArgs e)
         {
-            MakePictureBox();
+            PictureBox sourcePictureBox = sender as PictureBox;
+            MakePictureBox(sourcePictureBox);
+        }
+        private void NewPic_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+            {
 
+                PictureBox temPic = sender as PictureBox;
+                items.Remove(temPic);
+                this.Controls.Remove(temPic);
+
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                MakeTextBox(sender as PictureBox);
+            }
         }
 
+        private void NewTextBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            TextBox temText = sender as TextBox;
+            textures.Remove(temText);
+            this.Controls.Remove(temText);
+
+        }
         private void rotateBtn_Click(object sender, EventArgs e)
         {
             pictureBox1.Rotate((float)90);
@@ -290,6 +311,126 @@ namespace ECAD
             //    newPic.Rotate(45);
             //    newPic.Refresh();
         }
-    } 
-}
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                PictureBox sourcePictureBox = sender as PictureBox;
+                MakePictureBox(sourcePictureBox);
+            }
+        }
+        private bool IsObjectSelected()
+        {
+            foreach (EntityObject entity in entities)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+        private Pen drawPen = new Pen(Color.Black, 2);
+        private int currentLineIndex = -1;
+
+
+
+        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                PictureBox sourcePictureBox = sender as PictureBox;
+                MakePictureBox(sourcePictureBox);
+            }
+        }
+
+        private void pictureBox3_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                PictureBox sourcePictureBox = sender as PictureBox;
+                MakePictureBox(sourcePictureBox);
+            }
+        }
+
+        private void pictureBox4_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                PictureBox sourcePictureBox = sender as PictureBox;
+                MakePictureBox(sourcePictureBox);
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                VoltageSource V_input = new VoltageSource("V1", "in", "0", Double.Parse(textBox1.Text));
+                ckt.Add(V_input);
+            }
+            catch (System.FormatException err) { ckt.Remove("V1"); }
+            catch (System.ArgumentException err) { ckt.Remove("V1"); }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        { // Create a DC simulation that sweeps V1 from -1V to 1V in steps of 100mV
+            try
+            {
+                ckt.Add(new Resistor("R1", "in", "out", Double.Parse(textures[0].Text)));
+            }
+            catch (System.FormatException err) { ckt.Remove("R1"); }
+            catch (System.ArgumentException err) { ckt.Remove("R1"); }
+            try
+            {
+                ckt.Add(new Resistor("R2", "out", "0", Double.Parse(textures[1].Text)));
+            }
+            catch (System.FormatException err) { ckt.Remove("R2"); }
+            catch (System.ArgumentException err) { ckt.Remove("R2"); }
+            var dc = new DC("DC 1", "V1", Double.Parse(textBox2.Text), Double.Parse(textBox2.Text), Double.Parse(textBox2.Text));
+
+            // Create exports
+            var inputExport = new RealVoltageExport(dc, "in");
+            var outputExport = new RealVoltageExport(dc, "out");
+            var currentExport = new RealPropertyExport(dc, "V1", "i");
+            dc.ExportSimulationData += (s, exportDataEventArgs) =>
+            {
+                var input = inputExport.Value;
+                var output = outputExport.Value;
+                var current = currentExport.Value;
+                //exportDataEventArgs.GetVoltage("out");
+                textBox3.Text = output.ToString();
+                textBox4.Text = current.ToString();
+
+            };
+
+            // Run the simulation
+            try { dc.Run(ckt); }
+            catch (SpiceSharp.BehaviorsNotFoundException err)
+            {
+                ckt.Add(new VoltageSource("V1", "in", "0", Double.Parse(textBox2.Text)));
+                try { ckt.Add(new Resistor("R1", "in", "out", Double.Parse(textures[0].Text))); }
+                catch (System.ArgumentException)
+                {
+                    ckt.Remove("R1");
+                    ckt.Add(new Resistor("R1", "in", "out", Double.Parse(textures[0].Text)));
+                }
+                ckt.Remove("R2");
+                ckt.Add(new Resistor("R2", "out", "0", Double.Parse(textures[1].Text)));
+                dc.Run(ckt);
+            }
+        }
+        private void Calculate(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+               
+                }
+            }
+        }
+
+
+    }
 

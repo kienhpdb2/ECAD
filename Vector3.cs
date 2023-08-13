@@ -102,10 +102,7 @@ namespace ECAD
             double dz = v.Z - Z;
             return Math.Sqrt(dx * dx + dy * dy + dz * dz);
         }
-        public Vector2 ToVector2
-		{
-			get { return new Vector2(X, Y);}
-		}
+
 		public Vector3 CopyOrMove(Vector3 fromPoint, Vector3 toPoint)
 		{
 			double dx = toPoint.X - fromPoint.X;

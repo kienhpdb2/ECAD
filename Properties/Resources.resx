@@ -118,13 +118,25 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Web capture_10-8-2023_133345_spicesharp.github.io-fotor-20230810133543" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Web capture_10-8-2023_133345_spicesharp.github.io-fotor-20230810133543.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Voltage_Source.svg Cropped" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Voltage_Source.svg Cropped.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="360_F_337277306_bOwr2gmisHGZYFQrnYEYNmx2uVP7nTxE1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\360_F_337277306_bOwr2gmisHGZYFQrnYEYNmx2uVP7nTxE1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pngwing.com (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pngwing.com (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pure-white-background-85a2a7fd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pure-white-background-85a2a7fd.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="360_F_337277306_bOwr2gmisHGZYFQrnYEYNmx2uVP7nTxE1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\360_F_337277306_bOwr2gmisHGZYFQrnYEYNmx2uVP7nTxE1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Screenshot 2023-08-10 135836-fotor-20230810135929" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Screenshot 2023-08-10 135836-fotor-20230810135929.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="istockphoto-1068663328-1024x1024" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\istockphoto-1068663328-1024x10241.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
